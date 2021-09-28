@@ -1,5 +1,6 @@
 const keyBoard = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
+const ul = phrase.firstElementChild;
 const startButton = document.querySelector('.btn__reset');
 let missed = 0;
 
@@ -26,7 +27,6 @@ const randomPhrase = getRandomPhraseAsArray(phrases);
 
 //loop that adds the random phrase selected to display
 const addPhraseToDisplay = (randomPhraseSelected) => {
-    const ul = phrase.firstElementChild;
     for (let i=0; i < randomPhraseSelected.length ;i++) {
         const listItem = document.createElement('li');
         listItem.textContent = randomPhraseSelected[i];
@@ -37,7 +37,43 @@ const addPhraseToDisplay = (randomPhraseSelected) => {
             listItem.className = "space";
         }
     }
-    console.log(ul);   
 }
 
 addPhraseToDisplay(randomPhrase);
+
+const checkLetter = (button) => {
+    const checkLetter = ul.children;
+    let match = "";
+    for (let i=0; i < checkLetter.length; i++) {
+        if ( button.textContent === checkLetter[i].textContent) {
+            checkLetter[i].className = "show";
+            match = button.textContent;
+            return match;
+        } else {
+            match = "";
+        }
+    }
+}
+
+keyBoard.addEventListener('click', (e) => {
+    const letterButton = document.querySelectorAll('.keyrow button');
+    const selectedButton = e.target;
+    if ( selectedButton.tagName !== 'BUTTON' || selectedButton.className === 'chosen') {
+        return;
+    } else {
+        selectedButton.className = 'chosen';
+        selectedButton.style.backgroundColor = 'green';
+        const letterFound = checkLetter(selectedButton);
+        if (!letterFound) {
+            const ol = document.querySelector('#scoreboard').firstElementChild;
+            const imgLI = ol.firstElementChild;
+            ol.removeChild(imgLI);
+        }
+    }
+});
+
+    // if ( selectedButton !== letterButton || selectedButton.className !== 'chosen') {
+    //     return;
+    // } else {
+    //     
+    // }
