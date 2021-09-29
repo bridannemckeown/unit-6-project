@@ -43,37 +43,29 @@ addPhraseToDisplay(randomPhrase);
 
 const checkLetter = (button) => {
     const checkLetter = ul.children;
-    let match = "";
+    let match = null;
     for (let i=0; i < checkLetter.length; i++) {
         if ( button.textContent === checkLetter[i].textContent) {
             checkLetter[i].className = "show";
             match = button.textContent;
-            return match;
-        } else {
-            match = "";
-        }
+        } 
     }
+    return match;
 }
 
 keyBoard.addEventListener('click', (e) => {
     const letterButton = document.querySelectorAll('.keyrow button');
     const selectedButton = e.target;
-    if ( selectedButton.tagName !== 'BUTTON' || selectedButton.className === 'chosen') {
-        return;
-    } else {
-        selectedButton.className = 'chosen';
-        selectedButton.style.backgroundColor = 'green';
+    if ( selectedButton.tagName === 'BUTTON' && selectedButton.className !== 'chosen') {
         const letterFound = checkLetter(selectedButton);
-        if (!letterFound) {
+        if (letterFound == null) {
             const ol = document.querySelector('#scoreboard').firstElementChild;
             const imgLI = ol.firstElementChild;
             ol.removeChild(imgLI);
+            missed++;
+            console.log(missed);
+        } else {
+            selectedButton.classList.add('chosen');
         }
     }
 });
-
-    // if ( selectedButton !== letterButton || selectedButton.className !== 'chosen') {
-    //     return;
-    // } else {
-    //     
-    // }
