@@ -27,6 +27,7 @@ body {
   flex-direction: column;
   display: flex;
   height: 100vh;
+  font-family: 'Open Sans', sans-serif;
 }
 
 li, ol, ul {
@@ -39,7 +40,16 @@ h2 {
   text-transform: uppercase;
   font-family: 'Open Sans', sans-serif;
   font-size: var(--font-size-large);
-  margin: 0;
+  
+}
+
+h2.title {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 20vw;
+  margin-left: 20vw;
+  background-color: rgba(68, 80, 105, .8);
+  border-radius: 5px;
 }
 
 button {
@@ -82,7 +92,8 @@ button {
   height: 65px;
   width: 65px;
   padding: 20px 1px 0 1px;
-  margin-right: 2px;
+  margin-right: 5px;
+  margin-top: 15px;
   color: transparent;
   background: var(--color-neutral-light);
   border-radius: 5px;
@@ -95,6 +106,7 @@ button {
 .show {
   color: #000;
   background-color: #76CE82;
+  /* transition: all .5s ease-in-out; */
 }
 
 /* Keyboard */
@@ -102,6 +114,11 @@ button {
 .keyrow {
   display: flex;
   justify-content: center;
+}
+
+.keyrow button:hover {
+  transform: scale(1.4);
+  transition: all .2s ease-in-out;
 }
 
 .chosen {
@@ -117,6 +134,12 @@ button {
   background: #FFFFFF;
   border-radius: 5px;
   font-size: var(--font-size-medium);
+  cursor: pointer;
+  box-shadow: 5px 10px;
+}
+
+.btn__reset:hover {
+  box-shadow: 2px 5px;
 }
 
 /* Overlay */
@@ -134,16 +157,20 @@ button {
   border-radius: 5px;
 }
 
+.start {
+  background: linear-gradient(125deg, #1de88e, #1ddde8, #2b1de8), #19118b;
+}
+
 .title {
   color: #FFF;
 }
-
+/* 
 .start {
   background-color: var(--color-start);
-}
+} */
 
 .start a {
-  color: var(--color-win);
+  color: var(--color-neutral);
 }
 
 .win {

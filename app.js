@@ -47,6 +47,7 @@ const checkLetter = (button) => {
     for (let i=0; i < checkLetter.length; i++) {
         if ( button.textContent === checkLetter[i].textContent) {
             checkLetter[i].classList.add('show');
+            checkLetter[i].style.borderColor = 'black';
             match = button.textContent;
         } 
     }
@@ -60,6 +61,12 @@ keyBoard.addEventListener('click', (e) => {
     if ( selectedButton.tagName === 'BUTTON' && selectedButton.className !== 'chosen') {
         const letterFound = checkLetter(selectedButton);
         if (letterFound == null) {
+            selectedButton.disabled = true;
+            if (selectedButton.disabled = true) {
+                selectedButton.style.backgroundColor = '#D94545';
+                selectedButton.style.transform = "none";
+                selectedButton.style.transition = "none";
+            }
             const imgLI = document.querySelectorAll("[src$='liveHeart.png']");
             console.log(imgLI.length);
             if ( imgLI.length >= 1 ) {
@@ -73,18 +80,29 @@ keyBoard.addEventListener('click', (e) => {
     checkWin();
 });
 
-//checks if user has guessed all letters correctly (.letter & .show applied to same number of characters from random phrase array) to win or has more than 4 missed goes to lose
+//checks if user has guessed all letters correctly (.letter & .show applied to same number of characters from random phrase array) to win or has more than 4 missed goes to lose and then applies relevant overlay
 const checkWin = () => {
     const liLetter = document.querySelectorAll('li.letter');
     const liShow = document.querySelectorAll('li.show');
+    const selectedButton = document.querySelectorAll('.keyrow button');
     if (liLetter.length === liShow.length) {
+        for (let i=0; i<selectedButton.length; i++) {
+            selectedButton[i].style.transform = 'none';
+            selectedButton[i].style.transition = 'none';
+        }
         overlay.style.display = 'flex';
         overlay.classList.add('win');
+        overlay.classList.remove('start');
         overlay.firstElementChild.textContent = "You won!";
         overlay.removeChild(startButton);
     } else if (missed > 4) {
+        for (let i=0; i<selectedButton.length; i++) {
+            selectedButton[i].style.transform = 'none';
+            selectedButton[i].style.transition = 'none';
+        }
         overlay.style.display = 'flex';
         overlay.classList.add('lose');
+        overlay.classList.remove('start');
         overlay.firstElementChild.textContent = "Better luck next time!";
         overlay.removeChild(startButton);
     }
