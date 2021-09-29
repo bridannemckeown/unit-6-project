@@ -18,13 +18,13 @@ startButton.addEventListener('click', () => {
 
 //return a random phrase from the phrases array
 const getRandomPhraseAsArray = (arr) => {
- const randomNumber = Math.floor(Math.random() * arr.length);
- return arr[randomNumber].split("");
+    const randomNumber = Math.floor(Math.random() * arr.length);
+    return arr[randomNumber].split("");
 }
 
 const randomPhrase = getRandomPhraseAsArray(phrases);
 
-//loop that adds the random phrase selected to display
+//loop to adds the random phrase selected to display
 const addPhraseToDisplay = (randomPhraseSelected) => {
     for (let i=0; i < randomPhraseSelected.length ;i++) {
         const listItem = document.createElement('li');
@@ -40,6 +40,7 @@ const addPhraseToDisplay = (randomPhraseSelected) => {
 
 addPhraseToDisplay(randomPhrase);
 
+//checks the letter chosen from the keyboard against the letters in the random phrase
 const checkLetter = (button) => {
     const checkLetter = ul.children;
     let match = null;
@@ -52,6 +53,7 @@ const checkLetter = (button) => {
     return match;
 }
 
+//only previously unselected keyboard letter clicks are listened to and changes heart image src
 keyBoard.addEventListener('click', (e) => {
     const letterButton = document.querySelectorAll('.keyrow button');
     const selectedButton = e.target;
@@ -71,6 +73,7 @@ keyBoard.addEventListener('click', (e) => {
     checkWin();
 });
 
+//checks if user has guessed all letters correctly (.letter & .show applied to same number of characters from random phrase array) to win or has more than 4 missed goes to lose
 const checkWin = () => {
     const liLetter = document.querySelectorAll('li.letter');
     const liShow = document.querySelectorAll('li.show');
