@@ -2,18 +2,19 @@ const keyBoard = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 const ul = phrase.firstElementChild;
 const startButton = document.querySelector('.btn__reset');
+const overlay = document.querySelector('#overlay');
+
 let missed = 0;
 
 const phrases = [
     'time of your life',
     'whale of a time',
     'over the moon',
-    'jumping with joy',
+    'jumping for joy',
     'on top of the world'
 ];
 
 startButton.addEventListener('click', () => {
-    const overlay = startButton.parentNode;
     overlay.style.display = 'none';
 });
 
@@ -46,7 +47,7 @@ const checkLetter = (button) => {
     let match = null;
     for (let i=0; i < checkLetter.length; i++) {
         if ( button.textContent === checkLetter[i].textContent) {
-            checkLetter[i].className = "show";
+            checkLetter[i].classList.add('show');
             match = button.textContent;
         } 
     }
@@ -68,4 +69,21 @@ keyBoard.addEventListener('click', (e) => {
             selectedButton.classList.add('chosen');
         }
     }
+    checkWin();
 });
+
+const checkWin = () => {
+    const liLetter = document.querySelectorAll('li.letter');
+    const liShow = document.querySelectorAll('li.show');
+    if (liLetter.length === liShow.length) {
+        overlay.style.display = 'flex';
+        overlay.classList.add('win');
+        overlay.firstElementChild.textContent = "You won!";
+        overlay.removeChild(startButton);
+    } else if (missed > 4) {
+        overlay.style.display = 'flex';
+        overlay.classList.add('lose');
+        overlay.firstElementChild.textContent = "Better luck next time!";
+        overlay.removeChild(startButton);
+    }
+}
