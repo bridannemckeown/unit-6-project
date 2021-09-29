@@ -3,9 +3,7 @@ const phrase = document.getElementById('phrase');
 const ul = phrase.firstElementChild;
 const startButton = document.querySelector('.btn__reset');
 const overlay = document.querySelector('#overlay');
-
 let missed = 0;
-
 const phrases = [
     'time of your life',
     'whale of a time',
@@ -60,11 +58,12 @@ keyBoard.addEventListener('click', (e) => {
     if ( selectedButton.tagName === 'BUTTON' && selectedButton.className !== 'chosen') {
         const letterFound = checkLetter(selectedButton);
         if (letterFound == null) {
-            const ol = document.querySelector('#scoreboard').firstElementChild;
-            const imgLI = ol.firstElementChild;
-            ol.removeChild(imgLI);
+            const imgLI = document.querySelectorAll("[src$='liveHeart.png']");
+            console.log(imgLI.length);
+            if ( imgLI.length >= 1 ) {
+                imgLI[0].src = "images/lostHeart.png";
+            }
             missed++;
-            console.log(missed);
         } else {
             selectedButton.classList.add('chosen');
         }
