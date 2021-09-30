@@ -14,6 +14,15 @@ const phrases = [
 
 startButton.addEventListener('click', () => {
     overlay.style.display = 'none';
+    const h2Header = document.querySelector('h2.header');
+    if (overlay.style.display === 'none') {
+        h2Header.style.transform = 'rotate(720deg)';
+        h2Header.style.transition = 'all 0.5s ease-out';     
+        h2Header.addEventListener('transitionend', () => {
+            const instructionP = document.querySelector('#instructions p');
+            instructionP.style.visibility = 'visible';
+        }); 
+    }
 });
 
 //return a random phrase from the phrases array
@@ -86,9 +95,15 @@ const checkWin = () => {
     const liShow = document.querySelectorAll('li.show');
     const selectedButton = document.querySelectorAll('.keyrow button');
     if (liLetter.length === liShow.length) {
-        for (let i=0; i<selectedButton.length; i++) {
+        const h2Header = document.querySelector('h2.header');
+        h2Header.style.display = 'none';
+        for (let i=0; i < selectedButton.length; i++) {
             selectedButton[i].style.transform = 'none';
             selectedButton[i].style.transition = 'none';
+        }
+        for (let i=0; i < liShow.length; i++ ) {
+            liShow[i].style.transform = 'none';
+            liShow[i].style.transition = 'none';
         }
         overlay.style.display = 'flex';
         overlay.classList.add('win');
@@ -96,9 +111,15 @@ const checkWin = () => {
         overlay.firstElementChild.textContent = "You won!";
         overlay.removeChild(startButton);
     } else if (missed > 4) {
+        const h2Header = document.querySelector('h2.header');
+        h2Header.style.display = 'none';
         for (let i=0; i<selectedButton.length; i++) {
             selectedButton[i].style.transform = 'none';
             selectedButton[i].style.transition = 'none';
+        }
+        for (let i=0; i < liShow.length; i++ ) {
+            liShow[i].style.transform = 'none';
+            liShow[i].style.transition = 'none';
         }
         overlay.style.display = 'flex';
         overlay.classList.add('lose');

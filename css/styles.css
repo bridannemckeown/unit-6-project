@@ -35,8 +35,16 @@ li, ol, ul {
   display: inline-block;
 }
 
+p {
+  margin: 0 auto;
+}
+
+#instructions p {
+  visibility: hidden;
+}
+
 h2 {
-  margin: 0;
+  margin: 0 auto;
   text-transform: uppercase;
   font-family: 'Open Sans', sans-serif;
   font-size: var(--font-size-large);
@@ -55,7 +63,9 @@ h2.title {
 button {
   margin: 6px;
   border: 1px solid transparent;
-  padding: .5rem 1rem;
+  /* padding: .5rem 1rem; */
+  width: 40px;
+  height: 40px;
   color: var(--color-keys);
   font-size: var(--font-size-medium);
   background-color: var(--color-keys-light);
@@ -92,7 +102,7 @@ button {
   height: 65px;
   width: 65px;
   padding: 20px 1px 0 1px;
-  margin-right: 5px;
+  margin-right: 7px;
   margin-top: 15px;
   color: transparent;
   background: var(--color-neutral-light);
@@ -106,7 +116,8 @@ button {
 .show {
   color: #000;
   background-color: #76CE82;
-  /* transition: all .5s ease-in-out; */
+  transform: scale(1.07);
+  transition: all .5s ease-in-out;
 }
 
 /* Keyboard */
@@ -157,17 +168,13 @@ button {
   border-radius: 5px;
 }
 
-.start {
-  background: linear-gradient(125deg, #1de88e, #1ddde8, #2b1de8), #19118b;
-}
-
 .title {
   color: #FFF;
 }
-/* 
+
 .start {
-  background-color: var(--color-start);
-} */
+  background: linear-gradient(125deg, #1de88e, #1ddde8, #2b1de8), #19118b;
+}
 
 .start a {
   color: var(--color-neutral);
