@@ -109,8 +109,7 @@ const checkWin = () => {
             liShow[i].style.transition = 'none';
         }
         overlay.style.display = 'flex';
-        overlay.classList.add('win');
-        overlay.classList.remove('start');
+        overlay.className = ('win');
         overlay.firstElementChild.textContent = "You won!";
         overlay.firstElementChild.style.background = 'none';
         startButton.textContent = "Reset Game";
@@ -145,8 +144,7 @@ const checkWin = () => {
             liShow[i].style.transition = 'none';
         }
         overlay.style.display = 'flex';
-        overlay.classList.add('lose');
-        overlay.classList.remove('start');
+        overlay.className = 'lose';
         overlay.firstElementChild.textContent = "Better luck next time!";
         overlay.firstElementChild.style.background = 'none';
         startButton.textContent = "Reset Game";
