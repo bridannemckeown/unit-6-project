@@ -132,6 +132,18 @@ button {
   transition: all .2s ease-in-out;
 }
 
+.endtransform:hover {
+  transform: none;
+  transition: none;
+}
+
+.disabled {
+  background-color: var(--color-lose);
+  transform: none;
+  transition: none;
+}
+
+
 .chosen {
   background: var(--color-neutral);
   border-radius: 5px;

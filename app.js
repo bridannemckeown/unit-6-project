@@ -58,7 +58,7 @@ const checkLetter = (button) => {
     for (let i=0; i < checkLetter.length; i++) {
         if ( button.textContent === checkLetter[i].textContent) {
             checkLetter[i].classList.add('show');
-            checkLetter[i].style.borderColor = 'black';
+            checkLetter[i].style.border = '1px solid #445069';
             match = button.textContent;
         } 
     }
@@ -74,17 +74,16 @@ keyBoard.addEventListener('click', (e) => {
         if (letterFound == null) {
             selectedButton.disabled = true;
             if (selectedButton.disabled = true) {
-                selectedButton.style.backgroundColor = '#D94545';
-                selectedButton.style.transform = "none";
-                selectedButton.style.transition = "none";
+                selectedButton.classList.add('disabled');
             }
-            const imgLI = document.querySelectorAll("[src$='liveHeart.png']");
+            const imgLI = document.querySelectorAll("[src='images/liveHeart.png']");
             if ( imgLI.length >= 1 ) {
                 imgLI[0].src = "images/lostHeart.png";
             }
             missed++;
         } else {
             selectedButton.classList.add('chosen');
+            selectedButton.color = 'black';
         }
     }
     checkWin();
@@ -93,17 +92,19 @@ keyBoard.addEventListener('click', (e) => {
 
 //checks if user has guessed all letters correctly (.letter & .show applied to same number of characters from random phrase array) to win or has more than 4 missed goes to lose and then applies relevant overlay
 const checkWin = () => {
-    const letterButton = document.querySelectorAll('.keyrow button');
     const liLetter = document.querySelectorAll('li.letter');
     const liShow = document.querySelectorAll('li.show');
     const selectedButton = document.querySelectorAll('.keyrow button');
     if (liLetter.length === liShow.length) {
         const h2Header = document.querySelector('h2.header');
         h2Header.style.display = 'none';
-        for (let i=0; i < selectedButton.length; i++) {
-            selectedButton[i].style.transform = 'none';
-            selectedButton[i].style.transition = 'none';
-        }
+        // selectedButton.forEach(button => {
+        //     button.classList.add('endtransform');
+        // });
+        // for (let i=0; i < selectedButton.length; i++) {
+        //     selectedButton[i].style.transform = 'none';
+        //     selectedButton[i].style.transition = 'none';
+        // }
         for (let i=0; i < liShow.length; i++ ) {
             liShow[i].style.transform = 'none';
             liShow[i].style.transition = 'none';
@@ -115,30 +116,31 @@ const checkWin = () => {
         startButton.textContent = "Reset Game";
         startButton.addEventListener('click', () => {
             h2Header.style.display ='inline-block';
-            const li = document.querySelectorAll('.character');
-            console.log(li);
-            for (i=0; i < li.length; i++) {
-                li[i].remove();
+            const lis = document.querySelectorAll('.character');
+            lis.forEach(li => {
+                li.remove();
+            });
+            addPhraseToDisplay(getRandomPhraseAsArray(phrases));
+            for (let i=0; i < selectedButton.length; i++ ) {
+                selectedButton[i].removeAttribute('class');
+                selectedButton[i].removeAttribute('disabled');
             }
-            for (let i=0; i < letterButton.length; i++ ) {
-                letterButton[i].removeAttribute('class');
-                letterButton[i].removeAttribute('disabled');
-                letterButton[i].style.backgroundColor = '#E5E5E5';
-            }
-            const imgLI = document.querySelectorAll("[src$='lostHeart.png']");
+            const imgLI = document.querySelectorAll("[src='images/lostHeart.png']");
             imgLI.forEach(img => {
                 img.setAttribute('src', 'images/liveHeart.png');
               });
-            addPhraseToDisplay(getRandomPhraseAsArray(phrases));
             missed = 0;
         });
     } else if (missed > 4) {
         const h2Header = document.querySelector('h2.header');
         h2Header.style.display = 'none';
-        for (let i=0; i<selectedButton.length; i++) {
-            selectedButton[i].style.transform = 'none';
-            selectedButton[i].style.transition = 'none';
-        }
+        // for (let i=0; i<selectedButton.length; i++) {
+        //     selectedButton[i].style.transform = 'none';
+        //     selectedButton[i].style.transition = 'none';
+        // }
+        // selectedButton.forEach(button => {
+        //     button.classList.add('endtransform');
+        // });
         for (let i=0; i < liShow.length; i++ ) {
             liShow[i].style.transform = 'none';
             liShow[i].style.transition = 'none';
@@ -150,21 +152,19 @@ const checkWin = () => {
         startButton.textContent = "Reset Game";
         startButton.addEventListener('click', () => {
             h2Header.style.display ='inline-block';
-            const li = document.querySelectorAll('.character');
-            console.log(li);
-            for (i=0; i < li.length; i++) {
-                li[i].remove();
+            const lis = document.querySelectorAll('.character');
+            lis.forEach(li => {
+                li.remove();
+            });
+            addPhraseToDisplay(getRandomPhraseAsArray(phrases));
+            for (let i=0; i < selectedButton.length; i++ ) {
+                selectedButton[i].removeAttribute('class');
+                selectedButton[i].removeAttribute('disabled');
             }
-            for (let i=0; i < letterButton.length; i++ ) {
-                letterButton[i].removeAttribute('class');
-                letterButton[i].removeAttribute('disabled');
-                letterButton[i].style.backgroundColor = '#E5E5E5';
-            }
-            const imgLI = document.querySelectorAll("[src$='lostHeart.png']");
+            const imgLI = document.querySelectorAll("[src='images/lostHeart.png']");
             imgLI.forEach(img => {
                 img.setAttribute('src', 'images/liveHeart.png');
               });
-            addPhraseToDisplay(getRandomPhraseAsArray(phrases));
             missed = 0;
         });
     }
