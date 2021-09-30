@@ -63,6 +63,7 @@ const checkLetter = (button) => {
     return match;
 }
 
+
 //only previously unselected keyboard letter clicks are listened to and changes heart image src
 keyBoard.addEventListener('click', (e) => {
     const letterButton = document.querySelectorAll('.keyrow button');
@@ -89,6 +90,7 @@ keyBoard.addEventListener('click', (e) => {
     checkWin();
 });
 
+
 //checks if user has guessed all letters correctly (.letter & .show applied to same number of characters from random phrase array) to win or has more than 4 missed goes to lose and then applies relevant overlay
 const checkWin = () => {
     const liLetter = document.querySelectorAll('li.letter');
@@ -109,7 +111,8 @@ const checkWin = () => {
         overlay.classList.add('win');
         overlay.classList.remove('start');
         overlay.firstElementChild.textContent = "You won!";
-        overlay.removeChild(startButton);
+        overlay.firstElementChild.style.background = 'none';
+        startButton.textContent = "Reset Game";
     } else if (missed > 4) {
         const h2Header = document.querySelector('h2.header');
         h2Header.style.display = 'none';
@@ -125,6 +128,8 @@ const checkWin = () => {
         overlay.classList.add('lose');
         overlay.classList.remove('start');
         overlay.firstElementChild.textContent = "Better luck next time!";
-        overlay.removeChild(startButton);
+        overlay.firstElementChild.style.background = 'none';
+        startButton.textContent = "Reset Game";
     }
 }
+
