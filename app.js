@@ -41,8 +41,10 @@ const addPhraseToDisplay = (randomPhraseSelected) => {
         ul.appendChild(listItem);
         if ( randomPhraseSelected[i] !== " " ) {
             listItem.className = "letter";
+            listItem.classList.add('character');
         } else {
             listItem.className = "space";
+            listItem.classList.add('character');
         }
     }
 }
@@ -66,7 +68,6 @@ const checkLetter = (button) => {
 
 //only previously unselected keyboard letter clicks are listened to and changes heart image src
 keyBoard.addEventListener('click', (e) => {
-    const letterButton = document.querySelectorAll('.keyrow button');
     const selectedButton = e.target;
     if ( selectedButton.tagName === 'BUTTON' && selectedButton.className !== 'chosen') {
         const letterFound = checkLetter(selectedButton);
@@ -78,7 +79,6 @@ keyBoard.addEventListener('click', (e) => {
                 selectedButton.style.transition = "none";
             }
             const imgLI = document.querySelectorAll("[src$='liveHeart.png']");
-            console.log(imgLI.length);
             if ( imgLI.length >= 1 ) {
                 imgLI[0].src = "images/lostHeart.png";
             }
@@ -93,6 +93,7 @@ keyBoard.addEventListener('click', (e) => {
 
 //checks if user has guessed all letters correctly (.letter & .show applied to same number of characters from random phrase array) to win or has more than 4 missed goes to lose and then applies relevant overlay
 const checkWin = () => {
+    const letterButton = document.querySelectorAll('.keyrow button');
     const liLetter = document.querySelectorAll('li.letter');
     const liShow = document.querySelectorAll('li.show');
     const selectedButton = document.querySelectorAll('.keyrow button');
@@ -113,6 +114,25 @@ const checkWin = () => {
         overlay.firstElementChild.textContent = "You won!";
         overlay.firstElementChild.style.background = 'none';
         startButton.textContent = "Reset Game";
+        startButton.addEventListener('click', () => {
+            h2Header.style.display ='inline-block';
+            const li = document.querySelectorAll('.character');
+            console.log(li);
+            for (i=0; i < li.length; i++) {
+                li[i].remove();
+            }
+            for (let i=0; i < letterButton.length; i++ ) {
+                letterButton[i].removeAttribute('class');
+                letterButton[i].removeAttribute('disabled');
+                letterButton[i].style.backgroundColor = '#E5E5E5';
+            }
+            const imgLI = document.querySelectorAll("[src$='lostHeart.png']");
+            imgLI.forEach(img => {
+                img.setAttribute('src', 'images/liveHeart.png');
+              });
+            addPhraseToDisplay(getRandomPhraseAsArray(phrases));
+            missed = 0;
+        });
     } else if (missed > 4) {
         const h2Header = document.querySelector('h2.header');
         h2Header.style.display = 'none';
@@ -130,6 +150,25 @@ const checkWin = () => {
         overlay.firstElementChild.textContent = "Better luck next time!";
         overlay.firstElementChild.style.background = 'none';
         startButton.textContent = "Reset Game";
+        startButton.addEventListener('click', () => {
+            h2Header.style.display ='inline-block';
+            const li = document.querySelectorAll('.character');
+            console.log(li);
+            for (i=0; i < li.length; i++) {
+                li[i].remove();
+            }
+            for (let i=0; i < letterButton.length; i++ ) {
+                letterButton[i].removeAttribute('class');
+                letterButton[i].removeAttribute('disabled');
+                letterButton[i].style.backgroundColor = '#E5E5E5';
+            }
+            const imgLI = document.querySelectorAll("[src$='lostHeart.png']");
+            imgLI.forEach(img => {
+                img.setAttribute('src', 'images/liveHeart.png');
+              });
+            addPhraseToDisplay(getRandomPhraseAsArray(phrases));
+            missed = 0;
+        });
     }
 }
 
