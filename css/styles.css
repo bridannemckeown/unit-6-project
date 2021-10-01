@@ -132,11 +132,6 @@ button {
   transition: all .2s ease-in-out;
 }
 
-.endtransform:hover {
-  transform: none;
-  transition: none;
-}
-
 .disabled {
   background-color: var(--color-lose);
   transform: none;
@@ -178,6 +173,7 @@ button {
   left: 0;
   right: 0;
   border-radius: 5px;
+  z-index: 9999;
 }
 
 .title {
