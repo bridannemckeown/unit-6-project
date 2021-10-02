@@ -80,7 +80,7 @@ const checkLetterTyped = (key) => {
     return match;
 }
 
-
+//only previously unselected real computer keyboard letter clicks are listened to and changes heart image src
 window.addEventListener('keyup', (e) => {
     const inputLetter = e.key;
     if (inputLetter.length === 1 || inputLetter.match(/[a-z]/i)) {
@@ -105,7 +105,7 @@ window.addEventListener('keyup', (e) => {
 });
 
 
-//only previously unselected keyboard letter clicks are listened to and changes heart image src
+//only previously unselected website keyboard letter clicks are listened to and changes heart image src
 keyBoard.addEventListener('click', (e) => {
     const selectedButton = e.target;
     if ( selectedButton.tagName === 'BUTTON' && selectedButton.className !== 'chosen') {
